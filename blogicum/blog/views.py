@@ -17,12 +17,10 @@ from .models import Category, Comment, Post, User
 class IndexListView(ListView):
     model = Post
     queryset = Post.objects.prefetch_related(
-        'comments'
-    ).select_related('author').filter(
-            pub_date__lt=timezone.now(),
-            is_published=True,
-            category__is_published=True,
-        ).annotate(comment_count=Count('comments'))
+        'comments').select_related(
+        'author').filter(pub_date__lt=timezone.now(),
+                         is_published=True, category__is_published=True,
+                         ).annotate(comment_count=Count('comments'))
     template_name = 'blog/index.html'
     ordering = '-pub_date'
     paginate_by = 10
@@ -65,15 +63,12 @@ class PostDetailView(LoginRequiredMixin, DetailView):
 def user_profile(request, username):
     profile = get_object_or_404(User, username=username)
     queryset = Post.objects.select_related('author').filter(
-            author__username=username,
-        ).order_by('-pub_date').annotate(comment_count=Count('comments'))
+        author__username=username,).order_by(
+        '-pub_date').annotate(comment_count=Count('comments'))
     paginator = Paginator(queryset, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    context = {
-        'profile': profile,
-        'page_obj': page_obj,
-        }
+    context = {'profile': profile, 'page_obj': page_obj, }
     return render(request, 'blog/profile.html', context)
 
 
