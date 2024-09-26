@@ -47,6 +47,8 @@ Cоциальная сеть для публикации личных дневн
 <span style="display: inline-block; margin-right: 5px;">![alt text](https://img.shields.io/badge/python-3.9-blue)
 </span> <span style="display: inline-block; margin-right: 5px;">![alt text](https://img.shields.io/badge/django-4.2-green)
 </span> <span style="display: inline-block; margin-right: 5px;">![alt text](https://img.shields.io/badge/bootstrap-5.3-purple)
+</span> <span style="display: inline-block; margin-right: 5px;">
+![alt text](https://img.shields.io/badge/HTML-5-red)
 </span>
 
 ## Автор
